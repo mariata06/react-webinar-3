@@ -44,7 +44,7 @@ class Store {
   addItem() {
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: this.state.list.length + 1, title: 'Новая запись'}]
+      list: [...this.state.list, {code: new Date().getTime().toString(), title: 'Новая запись', counter: 0}]
     })
   };
 
@@ -52,7 +52,8 @@ class Store {
    * Удаление записи по коду
    * @param code
    */
-  deleteItem(code) {
+  deleteItem(e, code) {
+    e.stopPropagation();
     this.setState({
       ...this.state,
       list: this.state.list.filter(item => item.code !== code)
@@ -67,7 +68,10 @@ class Store {
     this.setState({
       ...this.state,
       list: this.state.list.map(item => {
-        if (item.code === code) {
+        if (item.code === code || item.selected){
+          if (!item.selected) {
+            item.counter++;
+          }
           item.selected = !item.selected;
         }
         return item;

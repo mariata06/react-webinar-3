@@ -1,3 +1,4 @@
+import React from 'react';
 const propNames = new Set(['id', 'className', 'textContent', 'onclick']);
 
 /**
@@ -25,4 +26,18 @@ export function createElement(name, props = {}, ...children) {
   }
 
   return element;
+}
+
+export function numWord(value) {
+  let num = value % 10;
+  if((value > 1 && value < 5) || (value > 21 && (num > 1 && num < 5))) return 'раза'; 
+  return 'раз';
+}
+
+export function selectMessage(num) {
+  if (num === 0) {
+    return '';
+  } else {
+    return <span>| Выделяли {num} {numWord(num)}</span>;
+  }
 }
