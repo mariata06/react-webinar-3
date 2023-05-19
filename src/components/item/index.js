@@ -1,19 +1,17 @@
-import React, {useState} from "react";
+import React from "react";
 import PropTypes from "prop-types";
-// import {plural} from "../../utils";
 import './style.css';
 import Controls from "../controls";
 
 function Item(props){
   return (
-    <div className={'Item' + (props.item.selected ? ' Item_selected' : '')}>
+    <div className='Item'>
       <div className='Item-code'>{props.item.code}</div>
       <div className='Item-title'>
-        {/* {props.item.title} {count ? ` | Выделяли ${count} ${plural(count, {one: 'раз', few: 'раза', many: 'раз'})}` : ''} */}
         {props.item.title}
       </div>
       <div className='Item-price'>
-        {props.item.price}&nbsp;₽
+        {(props.item.price+'').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')}&nbsp;₽
       </div>
       { props.item.amount && <div className='Item-amount'>
         {props.item.amount}&nbsp;шт
@@ -34,15 +32,13 @@ Item.propTypes = {
     count: PropTypes.number,
     price: PropTypes.number,
   }).isRequired,
-  // onDelete: PropTypes.func,
-  // onSelect: PropTypes.func
-  onAdd: PropTypes.func
+  onAdd: PropTypes.func,
+  onDeleteItem: PropTypes.func
 };
 
 Item.defaultProps = {
-  // onDelete: () => {},
-  // onSelect: () => {},
-  onAdd: () => {}
+  onAdd: () => {},
+  // onDeleteItem: () => {}
 }
 
 export default React.memo(Item);

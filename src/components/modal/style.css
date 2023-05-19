@@ -12,43 +12,38 @@
 }
 
 .Modal-content {
-    /* padding-top: 309px; */
     width: 960px;
     min-height: 407px;
     margin: auto;
     border-radius: 10px;
     overflow: hidden;
     background-color: #fff;
+
     opacity: 100%;
 }
 
-.Modal .List {
-    background-color: #fff;
-}
-
 .Modal-total {
-    background-color: #fff;
     font-size: 18px;
     font-weight: 700;
     padding: 20px;
     text-align: right;
-    padding-right: 126px;
     display: flex;
     justify-content: flex-end;
+    min-width: 140px;
 }
 
 .Modal-amount {
-    /* padding-left: 70px; */
-    /* width: 133px; */
-    width: 90px;
+    min-width: 140px;
+    text-align: left;
+    margin-left: 50px;
 }
 
 .Modal-wrapper {
     display: flex;
     width: 100%;
-    /* background-color: #fff; */
     background-color: #f5f5f5;;
     justify-content: space-between;
+    margin-bottom: 71px;
 }
 
 .Modal .Controls {

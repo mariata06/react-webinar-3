@@ -34,20 +34,11 @@ function App({store}) {
       store.deleteItem(code);
     }, [store]),
 
-    // onSelectItem: useCallback((code) => {
-    //   store.selectItem(code);
-    // }, [store]),
-
-    // onAddItem: useCallback(() => {
-    //   store.addItem();
-    // }, [store]),
-
     addToCart: useCallback((item) => {
       store.addToCart(item);
     }, [store]),
 
     goToCart: useCallback(() => {
-      // store.goToCart();
       setModalIsOpen(prev => !prev);
     }, [store])
   }
@@ -59,11 +50,7 @@ function App({store}) {
         <CartTotal totalAmount={totalAmount} totalCost={totalCost}/>
         <Controls goToCart={callbacks.goToCart} btnName={'Перейти'}/>
       </div>
-      <List list={list}
-            // onDeleteItem={callbacks.onDeleteItem}
-            // onSelectItem={callbacks.onSelectItem}
-            onAdd={callbacks.addToCart} 
-            />
+      <List list={list} onAdd={callbacks.addToCart}/>
       {modalIsOpen && <Modal cart={cart} totalCost={totalCost} onDeleteItem={callbacks.onDeleteItem} goToCart={callbacks.goToCart}/>}      
     </PageLayout>
   );
