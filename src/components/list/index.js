@@ -4,13 +4,13 @@ import Item from "../item";
 import './style.css';
 
 // function List({list, onDeleteItem, onSelectItem}){
-function List({list, onAdd}){
+function List({list, onAdd, onDeleteItem}){
   return (
     <div className='List'>{
       list.map(item =>
         <div key={item.code} className='List-item'>
           {/* <Item item={item} onDelete={onDeleteItem} onSelect={onSelectItem}/> */}
-          <Item item={item} onAdd={onAdd}/>
+          <Item item={item} onAdd={onAdd} onDeleteItem={onDeleteItem}/>
         </div>
       )}
     </div>

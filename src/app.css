@@ -1,0 +1,8 @@
+.App .wrapper {
+    display: flex;
+    width: 100%;
+}
+
+.App .Controls {
+    margin-left: auto;
+}

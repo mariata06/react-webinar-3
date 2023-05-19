@@ -1,0 +1,11 @@
+.CartTotal {
+    /* width: 50%; */
+    padding: 20px;
+    display: flex;
+}
+
+.CartTotal-amount,
+.CartTotal-cost {
+    font-size: 18px;
+    font-weight: 700;
+}
