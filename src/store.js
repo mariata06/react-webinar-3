@@ -62,7 +62,7 @@ class Store {
           if (cartItem.code === item.code) {
             return {
               ...cartItem,
-              amount: cartItem.amount + 1,
+              amount: ++cartItem.amount,
             };
           }
           return cartItem;
