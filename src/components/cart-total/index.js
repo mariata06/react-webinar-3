@@ -1,6 +1,7 @@
 import React from "react";
 import './style.css';
 import {plural} from "../../utils";
+import PropTypes from "prop-types";
 
 function CartTotal({totalAmount, totalCost}) {
     if (totalAmount > 0) {
@@ -11,7 +12,19 @@ function CartTotal({totalAmount, totalCost}) {
                 <div className='CartTotal-cost'>{(totalCost+'').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')}&nbsp;₽</div>
             </div>
         );    
+    } else {
+        return (
+            <div className='CartTotal'>
+                <span>В корзине:&nbsp;</span>
+                <div className="CartTotal-amount">&nbsp;пусто</div>
+            </div>
+        )        
     }
-}
+} 
+
+CartTotal.propTypes = {
+    totalAmount: PropTypes.number,
+    totalCost: PropTypes.number,
+};
 
 export default React.memo(CartTotal);

@@ -5,6 +5,7 @@ import Head from "./components/head";
 import Modal from "./components/modal";
 import PageLayout from "./components/page-layout";
 import CartTotal from './components/cart-total';
+import Cart from './components/cart';
 import './app.css';
 
 /**
@@ -51,7 +52,9 @@ function App({store}) {
         <Controls goToCart={callbacks.goToCart} btnName={'Перейти'}/>
       </div>
       <List list={list} onAdd={callbacks.addToCart}/>
-      {modalIsOpen && <Modal cart={cart} totalCost={totalCost} onDeleteItem={callbacks.onDeleteItem} goToCart={callbacks.goToCart}/>}      
+      { modalIsOpen && <Modal btnName={'Закрыть'} title={'Корзина'} goToCart={callbacks.goToCart}>
+        <Cart cart={cart} totalCost={totalCost} onDeleteItem={callbacks.onDeleteItem}/>
+      </Modal>}
     </PageLayout>
   );
 }

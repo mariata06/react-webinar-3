@@ -22,28 +22,13 @@
     opacity: 100%;
 }
 
-.Modal-total {
-    font-size: 18px;
-    font-weight: 700;
-    padding: 20px;
-    text-align: right;
-    display: flex;
-    justify-content: flex-end;
-    min-width: 140px;
-}
-
-.Modal-amount {
-    min-width: 140px;
-    text-align: left;
-    margin-left: 50px;
-}
-
 .Modal-wrapper {
     display: flex;
     width: 100%;
     background-color: #f5f5f5;;
     justify-content: space-between;
     margin-bottom: 71px;
+    flex-wrap: wrap;
 }
 
 .Modal .Controls {

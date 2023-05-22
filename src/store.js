@@ -84,7 +84,7 @@ class Store {
     let totalAmount = 0;
     let totalCost = 0;
     this.state.cart.map(cartItem => {
-        totalAmount += cartItem.amount;
+        totalAmount += 1;
         totalCost += cartItem.price * cartItem.amount;
     })
     this.setState({

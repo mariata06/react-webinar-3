@@ -22,4 +22,6 @@ body {
 
 .PageLayout .CartTotal {
   margin-left: auto;
+  font-size: 18px;
+  align-items: center;
 }
