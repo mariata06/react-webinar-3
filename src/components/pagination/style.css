@@ -1,0 +1,18 @@
+.Pagination {
+    min-height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+    font-size: 20px;
+}
+
+.Pagination-link {
+    padding: 10px 15px;
+    margin: 0 10px;
+    border: 1px solid grey;
+    text-decoration: none;
+}
+
+.Pagination-link.is-active {
+    border: 2px solid green;
+}
