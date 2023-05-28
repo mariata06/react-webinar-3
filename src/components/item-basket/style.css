@@ -3,16 +3,39 @@
   display: flex;
   justify-content: flex-start;
   transition: background-color 1s;
-  padding-left: 10px
+  padding-left: 20px;
 }
 
 .ItemBasket-code {
   padding: 20px 10px 20px 20px;
 }
 
+.ItemBasket-link {
+  margin-right: auto;
+  text-decoration: none;
+  position: relative;
+  color: #000;
+}
+
+.ItemBasket-link::after {
+  position: absolute;
+  content: '';
+  width: 0px;
+  height: 1px;
+  bottom: 24px;
+  display: block;
+  background: black;
+  transition: all 0.3s ease-out;
+}
+
+.ItemBasket-link:hover::after {
+  width: 100%;
+}
+
 .ItemBasket-title {
   width: 100%;
   padding: 20px 10px;
+  padding: 20px 0;
 }
 
 .ItemBasket-right {

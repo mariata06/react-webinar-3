@@ -1,5 +1,5 @@
 .Product {
-    padding: 20px;
+    padding: 20px 40px;
 }
 
 .Product-description,
@@ -27,4 +27,5 @@
 .wrapper a {
     padding: 20px;
     display: block;
+    color: #0087E9;
 }

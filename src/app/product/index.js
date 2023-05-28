@@ -5,10 +5,8 @@ import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import BasketTool from '../../components/basket-tool';
 import { Link } from 'react-router-dom';
-
 import {useParams} from 'react-router-dom';
 import './style.css';
-
 
 function Product() {
     const store = useStore();
@@ -58,16 +56,16 @@ function Product() {
                     {itemInfo[1]}
                 </div>
                 <div className='Product-manufacture'>
-                    Страна-производитель: <span>{itemInfo[2]}</span>
+                    Страна-производитель:&nbsp; <span>{itemInfo[2]}</span>
                 </div>
                 <div className='Product-category'>
-                    Категория: <span>{itemInfo[3]}</span>
+                    Категория:&nbsp; <span>{itemInfo[3]}</span>
                 </div>
                 <div className='Product-edition'>
-                    Год выпуска: <span>{itemInfo[4]}</span>
+                    Год выпуска:&nbsp; <span>{itemInfo[4]}</span>
                 </div>
                 <div className='Product-price'>
-                    Цена: <span>{itemInfo[5]}&nbsp;₽</span>
+                    Цена:&nbsp; <span>{itemInfo[5]}&nbsp;₽</span>
                 </div>
                 <button onClick={callbacks.addToBasket}>Добавить</button>
             </div>
