@@ -11,7 +11,7 @@ function Pagination(props){
     return (
         <div className='Pagination'>{
             pageLinks.map((i, page) => 
-                <div key={i}>
+                <div key={i} className="Pagination-page">
                     {!((page < props.currentPage - 1) && (page > 0)) &&
                      !((page > props.currentPage + 1) && (page < props.maxPage-1)) && 
                         <a onClick={() => props.changePageHandler(page)} href="#" className={page === props.currentPage? "Pagination-link is-active" : "Pagination-link"}>

@@ -1,0 +1,30 @@
+.Product {
+    padding: 20px;
+}
+
+.Product-description,
+.Product-manufacture, 
+.Product-category,
+.Product-edition,
+.Product-price {
+    font-size: 18px;
+    line-height: 21px;
+    margin-bottom: 20px;
+}
+
+.Product-manufacture span,
+.Product-category span,
+.Product-edition span,
+.Product-price span {
+    font-weight: 700;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrapper a {
+    padding: 20px;
+    display: block;
+}

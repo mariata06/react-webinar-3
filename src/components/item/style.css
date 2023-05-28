@@ -14,6 +14,14 @@
   padding: 20px 10px 20px 20px;
 }
 
+.Item-link {
+  width: 100%;
+  font-size: 16px;
+  line-height: 18px;
+  text-decoration: none;
+  color: #000;
+}
+
 .Item-title {
   width: 100%;
   padding: 20px 10px;

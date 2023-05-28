@@ -2,17 +2,33 @@
     min-height: 50px;
     display: flex;
     justify-content: flex-end;
-    padding: 20px;
+    padding: 22px 20px;
     font-size: 20px;
 }
 
 .Pagination-link {
-    padding: 10px 15px;
-    margin: 0 10px;
-    border: 1px solid grey;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 6px 0 5px;
+    height: 20px;
+    font-size: 16px;
+    line-height: 18px;
     text-decoration: none;
+    color: #000;
+    transition: all 0.3s ease-out;
 }
 
 .Pagination-link.is-active {
-    border: 2px solid green;
+    background-color: #0087E9;
+    color: white;
+}
+
+.Pagination-link:hover {
+    background-color: #E1E1E1;
+}
+
+.Pagination-page span {
+    color: #ccc;
 }
