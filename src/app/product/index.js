@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import {useParams} from 'react-router-dom';
 import './style.css';
 
-function Product() {
+function Product(props) {
     const store = useStore();
     
     const [itemInfo, setItemInfo] = useState({});
@@ -45,29 +45,45 @@ function Product() {
         <PageLayout>
             <Head title={itemInfo[0]}/>
             <div className='wrapper'>
-                <Link to={`/`}>
-                    Главная
-                </Link>
-                <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum}/>
+                {props.lang?<Link to={`/`}>Главная</Link>:<Link to={`/`}>Main</Link>}
+                <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} lang={props.lang}/>
             </div>
             
             <div className='Product'>
                  <div className='Product-description'>
                     {itemInfo[1]}
                 </div>
-                <div className='Product-manufacture'>
+
+                {props.lang?<div className='Product-manufacture'>
                     Страна-производитель:&nbsp; <span>{itemInfo[2]}</span>
-                </div>
-                <div className='Product-category'>
+                </div>:
+                <div className='Product-manufacture'>
+                    Country:&nbsp; <span>{itemInfo[2]}</span>
+                </div>}
+
+                {props.lang?<div className='Product-category'>
                     Категория:&nbsp; <span>{itemInfo[3]}</span>
-                </div>
-                <div className='Product-edition'>
+                </div>:
+                <div className='Product-category'>
+                    Category:&nbsp; <span>{itemInfo[3]}</span>
+                </div>}
+
+                {props.lang?<div className='Product-edition'>
                     Год выпуска:&nbsp; <span>{itemInfo[4]}</span>
-                </div>
-                <div className='Product-price'>
+                </div>:
+                <div className='Product-edition'>
+                    Year of production:&nbsp; <span>{itemInfo[4]}</span>
+                </div>}
+
+                {props.lang?<div className='Product-price'>
                     Цена:&nbsp; <span>{itemInfo[5]}&nbsp;₽</span>
-                </div>
-                <button onClick={callbacks.addToBasket}>Добавить</button>
+                </div>:
+                <div className='Product-price'>
+                    Price:&nbsp; <span>{itemInfo[5]}&nbsp;₽</span>
+                </div>}
+
+                {props.lang?<button onClick={callbacks.addToBasket}>Добавить</button>:
+                    <button onClick={callbacks.addToBasket}>Add</button>}
             </div>
         </PageLayout>
     );

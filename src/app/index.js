@@ -11,16 +11,21 @@ import Product from './product';
  * @returns {React.ReactElement}
  */
 function App() {
-  
+  const [lang, setLang] = useState(true);
   const activeModal = useSelector(state => state.modals.name);
+
+  const callbacks = {
+    // Смена языка
+    langChange: useCallback(() => setLang(prev => !prev), [lang])
+  }
 
   return (
     <Router>
       <Routes>
-        <Route path="/product/:id" element={<Product />} />
-        <Route path="/" element={<Main />} />
+        <Route path="/product/:id" element={<Product lang={lang}/>} />
+        <Route path="/" element={<Main lang={lang} setLang={callbacks.langChange}/>} />
       </Routes>
-      {activeModal === 'basket' && <Basket/>}
+      {activeModal === 'basket' && <Basket lang={lang}/>}
     </Router>
   );
 }

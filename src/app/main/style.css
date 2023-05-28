@@ -1,0 +1,9 @@
+.lang-switcher {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+}
+
+.lang-switcher button {
+    align-self: center;
+}

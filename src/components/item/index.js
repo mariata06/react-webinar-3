@@ -6,7 +6,7 @@ import './style.css';
 import { Link } from "react-router-dom";
 
 function Item(props){
-
+  
   const cn = bem('Item');
 
   const callbacks = {
@@ -24,7 +24,7 @@ function Item(props){
           </Link>
         <div className={cn('actions')}>
           <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>
-          <button onClick={callbacks.onAdd}>Добавить</button>
+          {props.lang?<button onClick={callbacks.onAdd}>Добавить</button>:<button onClick={callbacks.onAdd}>Add</button>}
         </div>
       </div>
     </>
