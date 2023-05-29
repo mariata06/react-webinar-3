@@ -6,7 +6,6 @@ import './style.css';
 import { Link } from "react-router-dom";
 
 function Item(props){
-  
   const cn = bem('Item');
 
   const callbacks = {

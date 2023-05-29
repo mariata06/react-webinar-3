@@ -22,7 +22,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/product/:id" element={<Product lang={lang}/>} />
+        <Route path="/product/:id" element={<Product lang={lang} setLang={callbacks.langChange}/>} />
         <Route path="/" element={<Main lang={lang} setLang={callbacks.langChange}/>} />
       </Routes>
       {activeModal === 'basket' && <Basket lang={lang}/>}

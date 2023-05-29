@@ -2,12 +2,11 @@ import {memo, useCallback, useEffect, useState} from 'react';
 import Item from "../../components/item";
 import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
-import BasketTool from "../../components/basket-tool";
 import List from "../../components/list";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import Pagination from '../../components/pagination';
-import './style.css';
+import Navigation from '../../components/navigation';
 
 function Main(props) {
   //изначальное состояние пагинации
@@ -18,7 +17,7 @@ function Main(props) {
   const store = useStore();
 
   useEffect(() => {
-    setMaxPage(Math.round(select.count / itemsPerPage));
+    setMaxPage(Math.ceil(select.count / itemsPerPage));
   }, [store.getState().catalog.count]);
 
   useEffect(() => {
@@ -51,12 +50,22 @@ function Main(props) {
    
     <PageLayout>
       <Head title={props.lang?'Магазин':'Shop'}/>
-      <div className='lang-switcher'>
-        <button onClick={() => props.setLang()}>English / Russian</button>
-        <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} lang={props.lang}/>
-      </div>
-      <List list={select.list} renderItem={renders.item}/>
-      <Pagination maxPage={maxPage} currentPage={currentPage} changePageHandler={callbacks.changePageHandler}/>
+      <Navigation 
+        openModalBasket={callbacks.openModalBasket} 
+        amount={select.amount} 
+        sum={select.sum} 
+        lang={props.lang} 
+        setLang={props.setLang}
+      />
+      <List 
+        list={select.list} 
+        renderItem={renders.item}
+      />
+      <Pagination 
+        maxPage={maxPage} 
+        currentPage={currentPage} 
+        changePageHandler={callbacks.changePageHandler}
+      />
     </PageLayout>
     
   );

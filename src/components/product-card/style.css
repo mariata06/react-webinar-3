@@ -1,0 +1,20 @@
+.ProductCard {
+    padding: 20px 40px;
+}
+
+.ProductCard-description,
+.ProductCard-manufacture,
+.ProductCard-category,
+.ProductCard-edition,
+.ProductCard-price {
+    font-size: 18px;
+    line-height: 21px;
+    margin-bottom: 20px;
+}
+
+.ProductCard-manufacture span,
+.ProductCard-category span,
+.ProductCard-edition span,
+.ProductCard-price span {
+    font-weight: 700;
+}

@@ -1,0 +1,16 @@
+.Navigation {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+}
+
+.Navigation-btn {
+    align-self: center;
+    margin-right: auto;
+    margin-left: 20px;
+}
+
+.Navigation-link {
+    align-self: center;
+    color: #0087E9;
+}
