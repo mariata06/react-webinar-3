@@ -9,20 +9,11 @@ import Pagination from '../../components/pagination';
 import Wrapper from '../../components/wrapper';
 
 function Main(props) {
-  //изначальное состояние пагинации
-  // const itemsPerPage = 10;
-  // const [maxPage, setMaxPage] = useState(0);
-  // const [currentPage, setCurrentPage] = useState(0);
-  
-  const store = useStore();
 
-  // useEffect(() => {
-  //   setMaxPage(Math.ceil(select.count / select.itemsPerPage));
-  // }, [store.getState().catalog.count]);
+  const store = useStore();
 
   useEffect(() => {
     store.actions.catalog.load(select.currentPage);
-  // }, [select.currentPage]);
   }, []);
 
   const select = useSelector(state => ({
@@ -41,7 +32,6 @@ function Main(props) {
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
     // Переход на страницу
-    // changePageHandler: useCallback(p => setCurrentPage(p), [currentPage]),
     changePageHandler: useCallback(p => store.actions.catalog.load(p), [store]),
   }
 

@@ -17,11 +17,6 @@ class Catalog extends StoreModule {
     }
   }
 
-  //изначальное состояние пагинации
-  // const itemsPerPage = 10;
-  // const [maxPage, setMaxPage] = useState(0);
-  // const [currentPage, setCurrentPage] = useState(0);
-
   async load(p) {
     const response = await fetch(`/api/v1/articles?limit=10&skip=${p*10}&fields=items(_id, title, price),count`);
     const json = await response.json();
