@@ -6,29 +6,33 @@ import List from "../../components/list";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import Pagination from '../../components/pagination';
-import Navigation from '../../components/navigation';
+import Wrapper from '../../components/wrapper';
 
 function Main(props) {
   //изначальное состояние пагинации
-  const itemsPerPage = 10;
-  const [maxPage, setMaxPage] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0);
+  // const itemsPerPage = 10;
+  // const [maxPage, setMaxPage] = useState(0);
+  // const [currentPage, setCurrentPage] = useState(0);
   
   const store = useStore();
 
-  useEffect(() => {
-    setMaxPage(Math.ceil(select.count / itemsPerPage));
-  }, [store.getState().catalog.count]);
+  // useEffect(() => {
+  //   setMaxPage(Math.ceil(select.count / select.itemsPerPage));
+  // }, [store.getState().catalog.count]);
 
   useEffect(() => {
-    store.actions.catalog.load(currentPage);
-  }, [currentPage]);
+    store.actions.catalog.load(select.currentPage);
+  // }, [select.currentPage]);
+  }, []);
 
   const select = useSelector(state => ({
     list: state.catalog.list,
     amount: state.basket.amount,
     sum: state.basket.sum,
-    count: state.catalog.count
+    count: state.catalog.count,
+    itemsPerPage: state.catalog.itemsPerPage,
+    currentPage: state.catalog.currentPage,
+    maxPage: state.catalog.maxPage
   }));
 
   const callbacks = {
@@ -37,7 +41,8 @@ function Main(props) {
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
     // Переход на страницу
-    changePageHandler: useCallback(p => setCurrentPage(p), [currentPage]),
+    // changePageHandler: useCallback(p => setCurrentPage(p), [currentPage]),
+    changePageHandler: useCallback(p => store.actions.catalog.load(p), [store]),
   }
 
   const renders = {
@@ -50,7 +55,7 @@ function Main(props) {
    
     <PageLayout>
       <Head title={props.lang?'Магазин':'Shop'}/>
-      <Navigation 
+      <Wrapper 
         openModalBasket={callbacks.openModalBasket} 
         amount={select.amount} 
         sum={select.sum} 
@@ -62,8 +67,8 @@ function Main(props) {
         renderItem={renders.item}
       />
       <Pagination 
-        maxPage={maxPage} 
-        currentPage={currentPage} 
+        maxPage={select.maxPage}
+        currentPage={select.currentPage}
         changePageHandler={callbacks.changePageHandler}
       />
     </PageLayout>

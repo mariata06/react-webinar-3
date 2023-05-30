@@ -5,7 +5,7 @@ import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import {useParams} from 'react-router-dom';
 import ProductCard from '../../components/product-card';
-import Navigation from '../../components/navigation';
+import Wrapper from '../../components/wrapper';
 
 function Product(props) {
     const store = useStore();
@@ -32,7 +32,7 @@ function Product(props) {
     return (
         <PageLayout>
             <Head title={select.item.title}/>
-            <Navigation 
+            <Wrapper 
                 openModalBasket={callbacks.openModalBasket} 
                 amount={select.amount} 
                 sum={select.sum} 
