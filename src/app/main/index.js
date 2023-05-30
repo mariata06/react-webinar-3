@@ -37,7 +37,7 @@ function Main(props) {
 
   const renders = {
     item: useCallback((item) => {
-      return <Item item={item} onAdd={callbacks.addToBasket} lang={props.lang}/>
+      return <Item itemPath={'/product/'} item={item} onAdd={callbacks.addToBasket} lang={props.lang}/>
     }, [callbacks.addToBasket, props.lang]),
   };
 
