@@ -12,11 +12,12 @@ class CatalogState extends StoreModule {
   initState() {
     return {
       list: [],
-      params: {
+      params: { 
         page: 1,
         limit: 10,
         sort: 'order',
-        query: ''
+        query: '',
+        category: '',
       },
       count: 0,
       waiting: false
@@ -35,6 +36,7 @@ class CatalogState extends StoreModule {
     if (urlParams.has('page')) validParams.page = Number(urlParams.get('page')) || 1;
     if (urlParams.has('limit')) validParams.limit = Math.min(Number(urlParams.get('limit')) || 10, 50);
     if (urlParams.has('sort')) validParams.sort = urlParams.get('sort');
+    if (urlParams.has('category')) validParams.category = urlParams.get('category');
     if (urlParams.has('query')) validParams.query = urlParams.get('query');
     await this.setParams({...this.initState().params, ...validParams, ...newParams}, true);
   }
@@ -76,14 +78,26 @@ class CatalogState extends StoreModule {
       window.history.pushState({}, '', url);
     }
 
-    const apiParams = {
-      limit: params.limit,
-      skip: (params.page - 1) * params.limit,
-      fields: 'items(*),count',
-      sort: params.sort,
-      'search[query]': params.query
-    };
-
+    let apiParams = {}
+    if (params.category === ''){
+      apiParams = {
+        limit: params.limit,
+        skip: (params.page - 1) * params.limit,
+        fields: 'items(*),count',
+        sort: params.sort,
+        'search[query]': params.query
+      };
+    } else {
+      apiParams = {
+        limit: params.limit,
+        skip: (params.page - 1) * params.limit,
+        fields: 'items(*),count',
+        sort: params.sort,
+        'search[category]': params.category,
+        'search[query]': params.query
+      };
+    }
+    
     const response = await fetch(`/api/v1/articles?${new URLSearchParams(apiParams)}`);
     const json = await response.json();
     this.setState({
@@ -92,6 +106,36 @@ class CatalogState extends StoreModule {
       count: json.result.count,
       waiting: false
     }, 'Загружен список товаров из АПИ');
+    console.log(`/api/v1/articles?${new URLSearchParams(apiParams)}`);
+    console.log(apiParams)
+
+    const response2 = await fetch(`/api/v1/categories?fields=_id,title,parent(_id)&limit=*`);
+    const json2 = await response2.json();
+    
+
+    let arr = [{value: '', title: 'Все'}];
+
+    const childFinder = (parent, depth) => {
+      json2.result.items.map(item => {
+        if (item.parent && item.parent._id === parent._id) {
+          arr.push({value: item._id, title: '-'.repeat(depth) + item.title})
+          childFinder(item, depth+1)
+        }
+      })
+    }
+
+    json2.result.items.map(item => {
+      if (!item.parent) {
+        arr.push({value: item._id, title: item.title})
+        childFinder(item, 1)
+      }
+    })
+
+    this.setState({
+      ...this.getState(),
+      categories: arr,
+      waiting: false
+    }, 'Загружены категории товаров из АПИ');
   }
 }
 

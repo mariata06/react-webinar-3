@@ -1,0 +1,33 @@
+.LoginForm {
+    padding: 20px 40px;
+}
+
+.LoginForm-formwrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.LoginForm-title {
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.LoginForm-inputlabel {
+    font-size: 16px;
+    line-height: 18px;
+    margin-bottom: 1px;
+}
+
+.LoginForm-inputwrapper {
+    margin-bottom: 20px;
+}
+
+.LoginForm-error {
+    color: #FF0000;
+    margin-bottom: 20px;
+}
+
+.LoginForm-submit {
+    margin-bottom: 20px;
+    align-self: baseline;
+}

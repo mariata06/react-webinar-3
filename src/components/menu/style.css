@@ -22,3 +22,9 @@
   margin-right: 0;
   padding-right: 0;
 }
+
+.Menu-item a {
+  color: #0087E9;
+  font-size: 18px;
+  line-height: 21px;
+}
