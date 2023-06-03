@@ -10,11 +10,12 @@ import useStore from "../../hooks/use-store";
 function UserNav({uName, onNavigate}) {
     // Функция для локализации текстов
     const {t} = useTranslate();
+    // console.log('usernav',uName);
     
     const options = {
         usermenu: useMemo(() => ([
-            {key: 2, title: t('usermenu.login'), link: '/login'},
-            {key: 3, title: t('usermenu.logout'), link: '/'},
+            {key: 2, title: t(uName?'usermenu.logout':'usermenu.login'), link: uName?'/':'/login'},
+            // {key: 3, title: t('usermenu.logout'), link: '/'},
             {key: 4, title: uName, link: '/profile'},
         ]), [t])
     };
