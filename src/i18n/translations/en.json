@@ -3,7 +3,6 @@
   "menu.main": "Main",
   "usermenu.login": "Login",
   "usermenu.logout": "Logout",
-  "usermenu.profile": "Profile",
   "loginform.title": "Login",
   "loginform.submit": "Login",
   "loginform.inputlogin": "Login",

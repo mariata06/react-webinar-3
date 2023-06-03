@@ -15,18 +15,18 @@ import Profile from '../../components/profile';
 import UserNav from '../../components/user-nav';
 
 function UserAccount() {
-
+  const store = useStore();
   const {t} = useTranslate();
 
   return (
     <PageLayout>
-      <UserNav />
+      <UserNav uName={store.getState().uName}/>
       {/* <LoginHeader /> */}
       <Head title={t('title')}/>
         {/* <LocaleSelect/> */}
       {/* </Head> */}
       <Navigation/>
-      <Profile />
+      <Profile uName={store.getState().uName} uPhone={store.getState().uPhone} uEmail={store.getState().uEmail}/>
     </PageLayout>
   );
 }

@@ -24,7 +24,7 @@ function Main() {
   return (
     <PageLayout>
       {/* <LoginHeader /> */}
-      <UserNav />
+      <UserNav uName={store.getState().uName}/>
       <Head title={t('title')}>
         <LocaleSelect/>
       </Head>

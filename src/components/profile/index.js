@@ -6,7 +6,7 @@ import './style.css';
 import useTranslate from "../../hooks/use-translate";
 // import Input from "../input";
 
-function Profile({data}) {
+function Profile(props) {
   const cn = bem('Profile');
   const {t} = useTranslate();
   return (
@@ -18,21 +18,21 @@ function Profile({data}) {
                 <div className={cn('datalabel')}>
                     {t('profile.username')}&nbsp;
                 </div>
-                User №1
+                {props.uName}
             </div>
 
             <div className={cn('datawrapper')}>
                 <div className={cn('datalabel')}>
                     {t('profile.userphone')}&nbsp;
                 </div>
-                +70000000001
+                {props.uPhone}
             </div>
 
             <div className={cn('datawrapper')}>
                 <div className={cn('datalabel')}>
                     email:&nbsp;
                 </div>
-                test_50@example.com
+                {props.uEmail}
             </div>
 
         </div>

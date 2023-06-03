@@ -14,12 +14,12 @@ import LoginForm from '../../components/login-form';
 import UserNav from '../../components/user-nav';
 
 function LoginPage() {
-
+  const store = useStore();
   const {t} = useTranslate();
 
   return (
     <PageLayout>
-      <UserNav />
+      <UserNav uName={store.getState().uName}/>
       {/* <LoginHeader /> */}
       <Head title={t('title')}/>
         {/* <LocaleSelect/> */}

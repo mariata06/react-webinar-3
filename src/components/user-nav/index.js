@@ -1,20 +1,21 @@
-import {memo, useMemo} from "react";
+import {memo, useMemo, useEffect} from "react";
 import PropTypes from 'prop-types';
 import {cn as bem} from "@bem-react/classname";
 import {Link} from "react-router-dom";
 import './style.css';
 import useTranslate from "../../hooks/use-translate";
 import SideLayout from "../side-layout";
+import useStore from "../../hooks/use-store";
 
-function UserNav({items, onNavigate}) {
+function UserNav({uName, onNavigate}) {
     // Функция для локализации текстов
     const {t} = useTranslate();
-
+    
     const options = {
         usermenu: useMemo(() => ([
             {key: 2, title: t('usermenu.login'), link: '/login'},
             {key: 3, title: t('usermenu.logout'), link: '/'},
-            {key: 4, title: t('usermenu.profile'), link: '/profile'},
+            {key: 4, title: uName, link: '/profile'},
         ]), [t])
     };
 

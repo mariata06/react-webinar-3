@@ -3,7 +3,6 @@
   "menu.main": "Главная",
   "usermenu.login": "Вход",
   "usermenu.logout": "Выход",
-  "usermenu.profile": "Профиль",
   "loginform.title": "Вход",
   "loginform.submit": "Войти",
   "loginform.inputlogin": "Логин",
