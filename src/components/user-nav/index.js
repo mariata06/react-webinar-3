@@ -14,9 +14,10 @@ function UserNav({uName, onNavigate}) {
     
     const options = {
         usermenu: useMemo(() => ([
-            {key: 2, title: t(uName?'usermenu.logout':'usermenu.login'), link: uName?'/':'/login'},
-            // {key: 3, title: t('usermenu.logout'), link: '/'},
-            {key: 4, title: uName, link: '/profile'},
+            {key: 2, title: uName, link: '/profile'},
+            {key: 3, title: t(uName?'usermenu.logout':'usermenu.login'), link: uName?'/':'/login'},
+            // {key: 4, title: t('usermenu.logout'), link: '/'},
+            
         ]), [t])
     };
 
@@ -25,11 +26,16 @@ function UserNav({uName, onNavigate}) {
     return (
         <SideLayout side='end'>
             <ul className={cn()}>
-                {options.usermenu.map(item => (
-                    <li key={item.key} className={cn('item')}>
-                    <Link to={item.link} onClick={() => onNavigate(item)}>{item.title}</Link>
-                    </li>
-                ))}
+                {options.usermenu.map(item => {
+                    if (item.title) {
+                        let flag = uName === item.title;
+                        return (
+                            <li key={item.key} className={flag?cn('itemUser'):cn('item')}>
+                                <Link to={item.link} onClick={() => onNavigate(item)}>{item.title}</Link>
+                            </li>
+                        )
+                    }
+                })}
             </ul>
         </SideLayout>
     )
