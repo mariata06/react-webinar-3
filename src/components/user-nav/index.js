@@ -7,11 +7,23 @@ import useTranslate from "../../hooks/use-translate";
 import SideLayout from "../side-layout";
 import useStore from "../../hooks/use-store";
 
-function UserNav({uName, onNavigate}) {
+function UserNav({uName}) {
     // Функция для локализации текстов
     const {t} = useTranslate();
+    const store = useStore();
     // console.log('usernav',uName);
     
+    const onNavigate = (item) => {
+        if(uName && item.title !== uName){
+            store.setState({
+                ...store.getState(),
+                uName: '',
+                uPhone: '',
+                uEmail: '',
+            }, 'Logout');
+        }
+    }
+
     const options = {
         usermenu: useMemo(() => ([
             {key: 2, title: uName, link: '/profile'},
