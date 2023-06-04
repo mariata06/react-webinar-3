@@ -19,12 +19,12 @@ function LoginForm(props) {
 
     const loginChangeHandler = (event) => {
         setEnteredLogin(event.target.value); 
-        console.log(event.target.value);
+        // console.log(event.target.value);
     } 
 
     const passwordChangeHandler = (event) => {
         setEnteredPassword(event.target.value); 
-        console.log(event.target.value);
+        // console.log(event.target.value);
     }; 
 
     const loginUser = async() => {
@@ -33,11 +33,8 @@ function LoginForm(props) {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
-            // "X-token": "fa57a7348079cd27f06260b99881e6d2b2fee56cff8e212a2cc2e89e0234243",
         },
         body: JSON.stringify({
-                // "login": "test_1",
-                // "password": "123456",
                 "login": enteredLogin,
                 "password": enteredPassword,
                 "remember": true
@@ -45,23 +42,14 @@ function LoginForm(props) {
             
         }).then(response => response.json())
         .then(result => {
-            // console.log(result);
-            // if (result.result) {
-            //     console.log(result.result.token);
-            //     console.log(result.result.user.email);
-            //     console.log(result.result.user.profile.name);
-            //     console.log(result.result.user.profile.phone);
-            // }
-
-            // if (result.error) console.log(result.error.message);
-
             if (result.result) {
                 store.setState({
                     ...store.getState(),
+                    token: result.result.token,
                     uName: result.result.user.profile.name,
                     uPhone: result.result.user.profile.phone,
                     uEmail: result.result.user.email,
-                }, 'Загружен профиль из АПИ');
+                }, 'Загружен токен из АПИ');
             }
 
             if (result.error) {
@@ -78,7 +66,6 @@ function LoginForm(props) {
 
     const submitHandler = (event) => {
         event.preventDefault();
-        // props.loginUser();
         loginUser();
     };
 
@@ -93,9 +80,6 @@ function LoginForm(props) {
                     <input 
                         value={enteredLogin}
                         onChange={loginChangeHandler}
-                        // value={props.value}
-                        // onChange={props.onChange}
-                        // type={props.type}
                         placeholder={'test'}
                     />
                 </div>
@@ -105,9 +89,6 @@ function LoginForm(props) {
                     <input 
                         value={enteredPassword}
                         onChange={passwordChangeHandler}
-                        // value={props.value}
-                        // onChange={props.onChange}
-                        // type={props.type}
                         placeholder={'•••'}
                     />
                 </div>

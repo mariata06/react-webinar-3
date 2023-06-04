@@ -1,7 +1,7 @@
-import {memo, useMemo, useEffect} from "react";
+import {memo, useMemo, useState, useEffect} from "react";
 import PropTypes from 'prop-types';
 import {cn as bem} from "@bem-react/classname";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import './style.css';
 import useTranslate from "../../hooks/use-translate";
 import SideLayout from "../side-layout";
@@ -10,44 +10,87 @@ import useStore from "../../hooks/use-store";
 function UserNav({uName}) {
     // Функция для локализации текстов
     const {t} = useTranslate();
-    const store = useStore();
-    // console.log('usernav',uName);
     
-    const onNavigate = (item) => {
-        if(uName && item.title !== uName){
+    const [auth, setAuth] = useState(false);
+    const store = useStore();
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        if (store.getState().token && store.getState().token !== '') {
+            setAuth(true);
+        } else {
+            setAuth(false);
+        }
+    },[store.getState().token])
+    
+    const onNavigate = async (act) => {
+        if(act === 'logout'){
+            console.log('выход');
+
+            await fetch('/api/v1/users/sign',
+            {
+                method: 'DELETE',
+                headers: {
+                    "X-token": store.getState().token,
+                    "Content-Type": "application/json",
+                },
+            }).then(response => response.json())
+            .then(result => {
+                console.log(result);
+            });
+
             store.setState({
                 ...store.getState(),
+                token: '',
                 uName: '',
                 uPhone: '',
                 uEmail: '',
             }, 'Logout');
+            navigate('/');
+        } 
+        if (act === 'profile') {
+            console.log('профиль');
+
+            // console.log('token: ', store.getState().token);
+            await fetch('/api/v1/users/self',
+                {
+                    method: 'GET',
+                    headers: {
+                        "X-token": store.getState().token,
+                        "Content-Type": "application/json",
+                    },
+                }).then(response => response.json())
+                .then(result => {
+                    // console.log(result);
+                    if (result.error) {
+                        console.log('токен не совпал');
+                        store.setState({
+                            ...store.getState(),
+                            token: '',
+                            uName: '',
+                            uPhone: '',
+                            uEmail: '',
+                        }, 'Logout');
+                        navigate('/login');
+                    }
+                })
+        } 
+        if (act === 'login') {
+            console.log('вход');
         }
     }
-
-    const options = {
-        usermenu: useMemo(() => ([
-            {key: 2, title: uName, link: '/profile'},
-            {key: 3, title: t(uName?'usermenu.logout':'usermenu.login'), link: uName?'/':'/login'},
-            // {key: 4, title: t('usermenu.logout'), link: '/'},
-            
-        ]), [t])
-    };
 
     const cn = bem('UserNav');
 
     return (
         <SideLayout side='end'>
             <ul className={cn()}>
-                {options.usermenu.map(item => {
-                    if (item.title) {
-                        let flag = uName === item.title;
-                        return (
-                            <li key={item.key} className={flag?cn('itemUser'):cn('item')}>
-                                <Link to={item.link} onClick={() => onNavigate(item)}>{item.title}</Link>
-                            </li>
-                        )
-                    }
-                })}
+                <li className={cn('itemUser')}>
+                    <Link to='/profile' onClick={() => onNavigate('profile')}>{uName}</Link>
+                </li>
+                <li className={cn('item')}>
+                    <Link to={auth?'/':'/login'} onClick={() => onNavigate(auth?'logout':'login')}>{t(auth?'usermenu.logout':'usermenu.login')}</Link>
+                </li>
             </ul>
         </SideLayout>
     )
