@@ -27,46 +27,17 @@ function LoginForm(props) {
         // console.log(event.target.value);
     }; 
 
-    const loginUser = async() => {
-        await fetch('/api/v1/users/sign',
-        {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-                "login": enteredLogin,
-                "password": enteredPassword,
-                "remember": true
-            }),
-            
-        }).then(response => response.json())
-        .then(result => {
-            if (result.result) {
-                store.setState({
-                    ...store.getState(),
-                    token: result.result.token,
-                    uName: result.result.user.profile.name,
-                    uPhone: result.result.user.profile.phone,
-                    uEmail: result.result.user.email,
-                }, 'Загружен токен из АПИ');
-            }
-
-            if (result.error) {
-                setError(result.error.message);
-            }
-
-            if (result.result) {
-                navigate('/');
-            }
-        })
-
-            console.log(store);  
-    }
-
-    const submitHandler = (event) => {
+    const submitHandler = async (event) => {
         event.preventDefault();
-        loginUser();
+        // loginUser();
+        await store.actions.login.setSession(enteredLogin,enteredPassword);
+        
+        if (store.getState().login.error === '') {
+            await store.actions.profile.loadProfile(enteredLogin,enteredPassword);
+            navigate('/');
+        } else {
+            setError(store.getState().login.error);
+        }
     };
 
     const cn = bem('LoginForm');
@@ -92,7 +63,7 @@ function LoginForm(props) {
                         placeholder={'•••'}
                     />
                 </div>
-                <span className={cn('error')}>{error}</span>
+                {error!==''&&<span className={cn('error')}>{error}</span>}
                 <button className={cn('submit')}            
                 >{t('loginform.submit')}</button>
             </form>

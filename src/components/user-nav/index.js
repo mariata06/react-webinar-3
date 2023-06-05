@@ -16,12 +16,12 @@ function UserNav({uName}) {
     const navigate = useNavigate();
 
     useEffect(()=>{
-        if (store.getState().token && store.getState().token !== '') {
+        if (store.getState().login.token && store.getState().login.token !== '') {
             setAuth(true);
         } else {
             setAuth(false);
         }
-    },[store.getState().token])
+    },[store.getState().login.token])
     
     const onNavigate = async (act) => {
         if(act === 'logout'){
@@ -31,7 +31,7 @@ function UserNav({uName}) {
             {
                 method: 'DELETE',
                 headers: {
-                    "X-token": store.getState().token,
+                    "X-token": store.getState().login.token,
                     "Content-Type": "application/json",
                 },
             }).then(response => response.json())
@@ -41,22 +41,20 @@ function UserNav({uName}) {
 
             store.setState({
                 ...store.getState(),
-                token: '',
-                uName: '',
-                uPhone: '',
-                uEmail: '',
-            }, 'Logout');
+                login: {},
+                profile: {}
+            });
+
             navigate('/');
         } 
         if (act === 'profile') {
             console.log('профиль');
 
-            // console.log('token: ', store.getState().token);
             await fetch('/api/v1/users/self',
                 {
                     method: 'GET',
                     headers: {
-                        "X-token": store.getState().token,
+                        "X-token": store.getState().login.token,
                         "Content-Type": "application/json",
                     },
                 }).then(response => response.json())
@@ -66,11 +64,9 @@ function UserNav({uName}) {
                         console.log('токен не совпал');
                         store.setState({
                             ...store.getState(),
-                            token: '',
-                            uName: '',
-                            uPhone: '',
-                            uEmail: '',
-                        }, 'Logout');
+                            login: {},
+                            profile: {}
+                        });
                         navigate('/login');
                     }
                 })
@@ -85,9 +81,9 @@ function UserNav({uName}) {
     return (
         <SideLayout side='end'>
             <ul className={cn()}>
-                <li className={cn('itemUser')}>
+                {auth && <li className={cn('itemUser')}>
                     <Link to='/profile' onClick={() => onNavigate('profile')}>{uName}</Link>
-                </li>
+                </li>}
                 <li className={cn('item')}>
                     <Link to={auth?'/':'/login'} onClick={() => onNavigate(auth?'logout':'login')}>{t(auth?'usermenu.logout':'usermenu.login')}</Link>
                 </li>

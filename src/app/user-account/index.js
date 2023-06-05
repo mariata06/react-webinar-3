@@ -1,5 +1,5 @@
 import {memo, useCallback, useMemo} from 'react';
-import {useParams} from "react-router-dom";
+import {useParams, useNavigate} from "react-router-dom";
 import useStore from "../../hooks/use-store";
 import useSelector from "../../hooks/use-selector";
 import useTranslate from "../../hooks/use-translate";
@@ -17,16 +17,19 @@ import UserNav from '../../components/user-nav';
 function UserAccount() {
   const store = useStore();
   const {t} = useTranslate();
+  // const navigate = useNavigate();
+  // console.log(store.getState().profile.uName);
+  // if (store.getState().login.token === '') navigate('/login');
 
   return (
     <PageLayout>
-      <UserNav uName={store.getState().uName}/>
+      <UserNav uName={store.getState().profile.uName}/>
       {/* <LoginHeader /> */}
       <Head title={t('title')}/>
         {/* <LocaleSelect/> */}
       {/* </Head> */}
       <Navigation/>
-      <Profile uName={store.getState().uName} uPhone={store.getState().uPhone} uEmail={store.getState().uEmail}/>
+      <Profile uName={store.getState().profile.uName} uPhone={store.getState().profile.uPhone} uEmail={store.getState().profile.uEmail}/>
     </PageLayout>
   );
 }

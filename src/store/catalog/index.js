@@ -108,34 +108,6 @@ class CatalogState extends StoreModule {
     }, 'Загружен список товаров из АПИ');
     console.log(`/api/v1/articles?${new URLSearchParams(apiParams)}`);
     console.log(apiParams)
-
-    const response2 = await fetch(`/api/v1/categories?fields=_id,title,parent(_id)&limit=*`);
-    const json2 = await response2.json();
-    
-
-    let arr = [{value: '', title: 'Все'}];
-
-    const childFinder = (parent, depth) => {
-      json2.result.items.map(item => {
-        if (item.parent && item.parent._id === parent._id) {
-          arr.push({value: item._id, title: '-'.repeat(depth) + item.title})
-          childFinder(item, depth+1)
-        }
-      })
-    }
-
-    json2.result.items.map(item => {
-      if (!item.parent) {
-        arr.push({value: item._id, title: item.title})
-        childFinder(item, 1)
-      }
-    })
-
-    this.setState({
-      ...this.getState(),
-      categories: arr,
-      waiting: false
-    }, 'Загружены категории товаров из АПИ');
   }
 }
 

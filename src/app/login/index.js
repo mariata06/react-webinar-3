@@ -19,7 +19,7 @@ function LoginPage() {
 
   return (
     <PageLayout>
-      <UserNav uName={store.getState().uName}/>
+      <UserNav uName={store.getState().profile.uName}/>
       {/* <LoginHeader /> */}
       <Head title={t('title')}/>
         {/* <LocaleSelect/> */}

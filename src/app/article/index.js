@@ -38,7 +38,7 @@ function Article() {
   return (
     <PageLayout>
       {/* <LoginHeader /> */}
-      <UserNav uName={store.getState().uName}/>
+      <UserNav uName={store.getState().profile.uName}/>
       <Head title={select.article.title}>
         <LocaleSelect/>
       </Head>
