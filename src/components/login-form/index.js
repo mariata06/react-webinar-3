@@ -31,9 +31,14 @@ function LoginForm(props) {
         event.preventDefault();
         // loginUser();
         await store.actions.login.setSession(enteredLogin,enteredPassword);
-        
+
         if (store.getState().login.error === '') {
             await store.actions.profile.loadProfile(enteredLogin,enteredPassword);
+            localStorage.setItem('token', JSON.stringify(store.getState().login.token));
+            localStorage.setItem('uName', JSON.stringify(store.getState().login.uName));
+            localStorage.setItem('login', JSON.stringify(enteredLogin));
+            localStorage.setItem('password', JSON.stringify(enteredPassword));
+
             navigate('/');
         } else {
             setError(store.getState().login.error);

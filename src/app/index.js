@@ -1,4 +1,3 @@
-import {useCallback, useContext, useEffect, useState} from 'react';
 import {Routes, Route} from 'react-router-dom';
 import useSelector from "../hooks/use-selector";
 import Main from "./main";
@@ -19,7 +18,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path={''} element={<Main/>}/>
+        <Route path={'/'} element={<Main/>}/>
         <Route path={'/articles/:id'} element={<Article/>}/>
         <Route path={'/login'} element={<LoginPage/>}/>
         <Route path={'/profile'} element={<UserAccount/>}/>

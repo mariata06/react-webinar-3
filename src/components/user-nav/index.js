@@ -10,14 +10,16 @@ import useStore from "../../hooks/use-store";
 function UserNav({uName}) {
     // Функция для локализации текстов
     const {t} = useTranslate();
-    
+    // console.log(uName);
     const [auth, setAuth] = useState(false);
+    const [name, setName] = useState(uName);
     const store = useStore();
     const navigate = useNavigate();
 
     useEffect(()=>{
         if (store.getState().login.token && store.getState().login.token !== '') {
             setAuth(true);
+            setName(store.getState().login.uName);
         } else {
             setAuth(false);
         }
@@ -38,6 +40,8 @@ function UserNav({uName}) {
             .then(result => {
                 console.log(result);
             });
+
+            localStorage.clear();
 
             store.setState({
                 ...store.getState(),
@@ -82,7 +86,7 @@ function UserNav({uName}) {
         <SideLayout side='end'>
             <ul className={cn()}>
                 {auth && <li className={cn('itemUser')}>
-                    <Link to='/profile' onClick={() => onNavigate('profile')}>{uName}</Link>
+                    <Link to='/profile' onClick={() => onNavigate('profile')}>{name}</Link>
                 </li>}
                 <li className={cn('item')}>
                     <Link to={auth?'/':'/login'} onClick={() => onNavigate(auth?'logout':'login')}>{t(auth?'usermenu.logout':'usermenu.login')}</Link>

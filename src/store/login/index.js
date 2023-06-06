@@ -14,6 +14,7 @@ class LoginState extends StoreModule {
       login: '',
       password: '',
       token: '',
+      uName: ''
     }
   }
 
@@ -38,9 +39,13 @@ class LoginState extends StoreModule {
       }).then(response => response.json())
       .then(result => {
         if (result.result) {
+          console.log('from setsession',result.result);
           this.setState({
             ...this.getState(),
+            login: login,
+            password: passw,
             token: result.result.token,
+            uName: result.result.user.profile.name
           }, 'Загружен токен из АПИ');
         }
 

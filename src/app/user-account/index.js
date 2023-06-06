@@ -17,13 +17,17 @@ import UserNav from '../../components/user-nav';
 function UserAccount() {
   const store = useStore();
   const {t} = useTranslate();
+
   // const navigate = useNavigate();
   // console.log(store.getState().profile.uName);
+  // console.log('from user-account');
   // if (store.getState().login.token === '') navigate('/login');
+
 
   return (
     <PageLayout>
-      <UserNav uName={store.getState().profile.uName}/>
+      {/* <UserNav uName={store.getState().profile.uName}/> */}
+      <UserNav uName={store.getState().login.uName}/>
       {/* <LoginHeader /> */}
       <Head title={t('title')}/>
         {/* <LocaleSelect/> */}
