@@ -18,13 +18,16 @@ class ProfileState extends StoreModule {
     }
   }
 
-  async loadProfile(login, passw) {
+  async loadProfile() {
     this.setState({
         uName: '',
         uPhone: '',
         uEmail: '',
         waiting: true
     });
+
+    let login = JSON.parse(localStorage.getItem('login'));
+    let passw = JSON.parse(localStorage.getItem('password'));
 
     await fetch('/api/v1/users/sign',
         {

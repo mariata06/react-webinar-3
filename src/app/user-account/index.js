@@ -18,11 +18,14 @@ function UserAccount() {
   const store = useStore();
   const {t} = useTranslate();
 
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (store.getState().profile.uName==='') navigate('/login');
-  }, []);
 
+
+  const navigate = useNavigate();
+  // useEffect(() => {
+  useInit(async () => {
+    if (store.getState().login.uName==='') navigate('/login');
+    await store.actions.profile.loadProfile();
+  }, [], true)
 
   return (
     <PageLayout>
@@ -33,7 +36,7 @@ function UserAccount() {
         {/* <LocaleSelect/> */}
       {/* </Head> */}
       <Navigation/>
-      <Profile uName={store.getState().profile.uName} uPhone={store.getState().profile.uPhone} uEmail={store.getState().profile.uEmail}/>
+      <Profile/>
     </PageLayout>
   );
 }
