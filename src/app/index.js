@@ -17,7 +17,6 @@ import useInit from "../hooks/use-init";
 function App() {
 
   const activeModal = useSelector(state => state.modals.name);
-  
   const store = useStore();
   useInit(async () => {
     await store.actions.login.checkLogin();

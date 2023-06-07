@@ -12,13 +12,14 @@ function UserNav({uName}) {
     const {t} = useTranslate();
     // console.log(uName);
     
-    // const [name, setName] = useState(uName);
+    const [name, setName] = useState(uName);
     const store = useStore();
     const navigate = useNavigate();
 
     const [auth, setAuth] = useState(store.getState().login.auth);
     useEffect(() => {
         setAuth(store.getState().login.auth);
+        setName(store.getState().login.uName)
     }, [store.getState().login.auth]);
     
     const onNavigate = async (act) => {
@@ -83,7 +84,7 @@ function UserNav({uName}) {
         <SideLayout side='end'>
             <ul className={cn()}>
                 {auth && <li className={cn('itemUser')}>
-                    <Link to='/profile' onClick={() => onNavigate('profile')}>{uName}</Link>
+                    <Link to='/profile' onClick={() => onNavigate('profile')}>{name}</Link>
                 </li>}
                 <li className={cn('item')}>
                     <Link to={auth?'/':'/login'} onClick={() => onNavigate(auth?'logout':'login')}>{t(auth?'usermenu.logout':'usermenu.login')}</Link>
