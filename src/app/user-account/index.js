@@ -1,4 +1,4 @@
-import {memo, useCallback, useMemo} from 'react';
+import {memo, useCallback, useMemo, useEffect} from 'react';
 import {useParams, useNavigate} from "react-router-dom";
 import useStore from "../../hooks/use-store";
 import useSelector from "../../hooks/use-selector";
@@ -18,10 +18,10 @@ function UserAccount() {
   const store = useStore();
   const {t} = useTranslate();
 
-  // const navigate = useNavigate();
-  // console.log(store.getState().profile.uName);
-  // console.log('from user-account');
-  // if (store.getState().login.token === '') navigate('/login');
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (store.getState().profile.uName==='') navigate('/login');
+  }, []);
 
 
   return (
