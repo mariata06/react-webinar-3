@@ -2,14 +2,14 @@
     display: flex;
     list-style: none;
     justify-content: flex-start;
-    padding: 20px;
+    padding: 10px 20px;
     margin: 0;
     font-size: 18px;
 }
 
 .UserNav-item {
     display: block;
-    padding: 2px 4px 3px 2px;
+    /* padding: 2px 4px 3px 2px; */
     margin: 0 2px 0 20px;
 }
 
@@ -21,7 +21,7 @@
     background-color: #EFEFEF;
     border: 1px solid #767676;
     border-radius: 2px;
-    padding: 5px 10px;
+    padding: 2px 10px;
 }
 
 .UserNav-itemUser {
